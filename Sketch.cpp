@@ -14,16 +14,16 @@ void Sketch::setup()
     serial.begin(Globals::RX_BAUD_RATE);
     
     //Start the hardware serial aswell
-    Serial.begin(9600);
+    Serial.begin(115200);
 
     Serial.println("Setup complete");
 }
 void Sketch::main()
 {
-    if(serial.available())
+    while(serial.available())
     {
-        Serial.println("Got message");
-        Serial.println(serial.read());
+        Serial.println(serial.available());
+        serial.read();
     }
 
 }
