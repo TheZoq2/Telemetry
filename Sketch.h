@@ -9,6 +9,7 @@
 
 
 #include "Globals.h"
+#include "TelemetryReader.h"
 
 class Sketch
 {
@@ -18,6 +19,8 @@ public:
     void setup();
     void main();
 private:
-    SoftwareSerial serial;
+    SoftwareSerial xSerial;
+
+    TelemetryReader telemetryReader;
 };
 #endif
