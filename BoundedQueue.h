@@ -54,6 +54,11 @@ public:
         return data[(begin + index)%maxSize];
     }
 
+    T& bottom()
+    {
+        return data[(begin + end) % maxSize];
+    }
+
     size_t getSize() const
     {
         return size;

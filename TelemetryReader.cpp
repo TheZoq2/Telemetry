@@ -14,10 +14,16 @@ void TelemetryReader::update()
 
         if(currentFrame.getSize() == FRAME_LENGTH)
         {
+            //for(uint8_t i = 0; i < FRAME_LENGTH; ++i)
+            //{
+            //    Serial.print(currentFrame.peek(i), HEX);
+            //    Serial.print(" ");
+            //}
+            //Serial.println("");
             uint8_t firstByte = currentFrame.dequeue();
 
             //The following bytes are a valid frame
-            if(firstByte == FRAME_EDGE_BYTE && currentFrame.peek(FRAME_LENGTH-1) == FRAME_EDGE_BYTE)
+            if(firstByte == FRAME_EDGE_BYTE && isValidFrame())
             {
                 decodeFrame();
             }
@@ -66,5 +72,10 @@ void TelemetryReader::decodeFrame()
 void TelemetryReader::parseLinkQuality() 
 {
     
+}
+
+bool TelemetryReader::isValidFrame() 
+{
+    return currentFrame.peek(0) != FRAME_EDGE_BYTE;
 }
 
