@@ -5,6 +5,10 @@ TelemetryReader::TelemetryReader(SoftwareSerial& xSerial):
     currentFrame(FRAME_LENGTH)
 {
 }
+TelemetryReader::~TelemetryReader()
+{
+    delete[] dataValues;
+}
 
 void TelemetryReader::update() 
 {
@@ -31,6 +35,11 @@ void TelemetryReader::update()
     }
 }
 
+uint8_t TelemetryReader::getDataValue(TelemetryData::DataIndex dataType) 
+{
+    return dataValues[dataType];
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////
 void TelemetryReader::readByte() 
@@ -48,9 +57,9 @@ void TelemetryReader::decodeFrame()
     bool gotValidMessage = false;
     switch(headerByte)
     {
-        case(0xFE):
+        case(RC_STATUS_HEADER):
         {
-            Serial.println("Got linkQuality");
+            parseRCStatus();
 
             gotValidMessage = true;
             break;
@@ -69,9 +78,15 @@ void TelemetryReader::decodeFrame()
 
 }
 
-void TelemetryReader::parseLinkQuality() 
+//The RC status frame has the following structure
+//0xXX Analog port1
+//0xXX Analog port2
+//0xXX Link quality
+void TelemetryReader::parseRCStatus() 
 {
-    
+    dataValues[TelemetryData::ANALOG1] = currentFrame.dequeue();
+    dataValues[TelemetryData::ANALOG2] = currentFrame.dequeue();
+    dataValues[TelemetryData::LINK_QUALITY] = currentFrame.dequeue();
 }
 
 bool TelemetryReader::isValidFrame() 

@@ -7,6 +7,7 @@
 #include <stdint.h>
 
 #include "BoundedQueue.h"
+#include "TelemetryData.h"
 
 /*
  *  Note that the documentation might be wrong. It appears like the bytes sent from my
@@ -19,30 +20,35 @@ class TelemetryReader
 {
 public:
     TelemetryReader(SoftwareSerial& xSerial);
+    ~TelemetryReader();
     void update();
 
-    //Read a single byte from the serial feed. 
+    uint8_t getDataValue(TelemetryData::DataIndex dataType);
 private:
+    //Read a single byte from the serial feed. 
     void readByte();
 
     void decodeFrame();
 
-    void parseLinkQuality();
+    void parseRCStatus();
 
     //Return true if the current frame looks valid
     //This assumes that the startByte has been popped off
     bool isValidFrame();
 
+    //Static constants
     static const uint8_t FRAME_LENGTH = 10;
 
     static const uint8_t FRAME_EDGE_BYTE = 0x7E;
 
-    static const uint8_t LINK_QUALITY_HEADER = 0xFE;
+    static const uint8_t RC_STATUS_HEADER = 0xFE;
 
+    //Private members
     SoftwareSerial& xSerial;
 
-    
     //The current frame needs to be stored because the tx/rx seem to spit out data as it arrives.
     BoundedQueue<uint8_t> currentFrame;
+
+    uint8_t dataValues[TelemetryData::enum_size];
 };
 #endif
