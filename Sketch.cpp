@@ -13,11 +13,12 @@ void Sketch::setup()
     pinMode(Globals::TX_PIN, OUTPUT);
     //Initialise serial communication
     xSerial.begin(Globals::RX_BAUD_RATE);
+    delay(200);
     
     //Start the hardware serial aswell
     Serial.begin(115200);
 
-    Serial.println("Setup complete");
+    Serial.println("Initialising monitor");
 
     dataDrawer.init();
 
@@ -30,6 +31,12 @@ void Sketch::setup()
 
     delay(200);
     dataDrawer.prepareDisplay();
+    Serial.println("Setup complete");
+
+    //xSerial.available();
+    Serial.println("Starting main");
+
+    //xSerial.available();
 }
 
 void Sketch::main()

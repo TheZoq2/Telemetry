@@ -8,20 +8,21 @@ TelemetryReader::TelemetryReader(SoftwareSerial& xSerial):
 
 void TelemetryReader::update() 
 {
+    //xSerial.available();
     //if(xSerial.available())
     //{
-    //    //readByte();
+    //    readByte();
 
-    //    //if(currentFrame.getSize() == FRAME_LENGTH)
-    //    //{
-    //    //    uint8_t firstByte = currentFrame.dequeue();
+    //    if(currentFrame.getSize() == FRAME_LENGTH)
+    //    {
+    //        uint8_t firstByte = currentFrame.dequeue();
 
-    //    //    //The following bytes are a valid frame
-    //    //    if(firstByte == FRAME_EDGE_BYTE && isValidFrame())
-    //    //    {
-    //    //        decodeFrame();
-    //    //    }
-    //    //}
+    //        //The following bytes are a valid frame
+    //        if(firstByte == FRAME_EDGE_BYTE && isValidFrame())
+    //        {
+    //            decodeFrame();
+    //        }
+    //    }
     //}
 }
 

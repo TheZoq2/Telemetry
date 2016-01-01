@@ -4,6 +4,7 @@
 //Arduino stuff
 #include <Arduino.h>
 #include <SoftwareSerial.h>
+#include <AltSoftSerial.h>
 
 //Display stuff
 #include <Adafruit_GFX.h>    // Core graphics library
