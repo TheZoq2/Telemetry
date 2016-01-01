@@ -5,34 +5,24 @@ TelemetryReader::TelemetryReader(SoftwareSerial& xSerial):
     currentFrame(FRAME_LENGTH)
 {
 }
-TelemetryReader::~TelemetryReader()
-{
-    delete[] dataValues;
-}
 
 void TelemetryReader::update() 
 {
-    if(xSerial.available())
-    {
-        readByte();
+    //if(xSerial.available())
+    //{
+    //    //readByte();
 
-        if(currentFrame.getSize() == FRAME_LENGTH)
-        {
-            //for(uint8_t i = 0; i < FRAME_LENGTH; ++i)
-            //{
-            //    Serial.print(currentFrame.peek(i), HEX);
-            //    Serial.print(" ");
-            //}
-            //Serial.println("");
-            uint8_t firstByte = currentFrame.dequeue();
+    //    //if(currentFrame.getSize() == FRAME_LENGTH)
+    //    //{
+    //    //    uint8_t firstByte = currentFrame.dequeue();
 
-            //The following bytes are a valid frame
-            if(firstByte == FRAME_EDGE_BYTE && isValidFrame())
-            {
-                decodeFrame();
-            }
-        }
-    }
+    //    //    //The following bytes are a valid frame
+    //    //    if(firstByte == FRAME_EDGE_BYTE && isValidFrame())
+    //    //    {
+    //    //        decodeFrame();
+    //    //    }
+    //    //}
+    //}
 }
 
 uint8_t TelemetryReader::getDataValue(TelemetryData::DataIndex dataType) 
@@ -53,6 +43,8 @@ void TelemetryReader::decodeFrame()
 {
     //Read the next byte
     uint8_t headerByte = currentFrame.dequeue();
+
+    Serial.println("Read header byte");
 
     bool gotValidMessage = false;
     switch(headerByte)

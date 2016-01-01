@@ -13,7 +13,7 @@ struct Globals
     static const int RX_BAUD_RATE = 9600;
 
     static const uint8_t TFT_CS = A4;
-    static const uint8_t TFT_RST = 0;
+    static const uint8_t TFT_RST = A3;
     static const uint8_t TFT_DC = A5;
 };
 

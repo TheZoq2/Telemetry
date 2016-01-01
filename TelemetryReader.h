@@ -20,7 +20,7 @@ class TelemetryReader
 {
 public:
     TelemetryReader(SoftwareSerial& xSerial);
-    ~TelemetryReader();
+
     void update();
 
     uint8_t getDataValue(TelemetryData::DataIndex dataType);
