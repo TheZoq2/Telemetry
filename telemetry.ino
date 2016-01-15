@@ -4,6 +4,8 @@
 #include <SPI.h>
 #include <AltSoftSerial.h>
 
+#include <BoundedQueue.h>
+
 #include "Sketch.h"
 
 Sketch sketch;
