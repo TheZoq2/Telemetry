@@ -1,8 +1,13 @@
 #include "Sketch.h"
 
+/*
 Sketch::Sketch() :
     xSerial(Globals::RX_PIN, Globals::TX_PIN, true), //Initialise inverted serial to talk to the receiver
     telemetryReader(xSerial)
+{
+}
+*/
+Sketch::Sketch()
 {
 }
 
@@ -11,8 +16,9 @@ void Sketch::setup()
     //Set up pins for serial
     pinMode(Globals::RX_PIN, INPUT);
     pinMode(Globals::TX_PIN, OUTPUT);
+    pinMode(0, OUTPUT);
     //Initialise serial communication
-    xSerial.begin(Globals::RX_BAUD_RATE);
+    //xSerial.begin(Globals::RX_BAUD_RATE);
     delay(200);
     
     //Start the hardware serial aswell
@@ -37,16 +43,21 @@ void Sketch::setup()
     Serial.println("Starting main");
 
     //xSerial.available();
+    
+    Serial.send_now();
+    
+    digitalWrite(0, HIGH);
 }
 
 void Sketch::main()
 {
-    telemetryReader.update();
+    //telemetryReader.update();
 
-    dataDrawer.setValue(TelemetryData::ANALOG1, telemetryReader.getDataValue(TelemetryData::ANALOG1));
-    dataDrawer.setValue(TelemetryData::LINK_QUALITY, telemetryReader.getDataValue(TelemetryData::LINK_QUALITY));
+    //dataDrawer.setValue(TelemetryData::ANALOG1, telemetryReader.getDataValue(TelemetryData::ANALOG1));
+    //dataDrawer.setValue(TelemetryData::LINK_QUALITY, telemetryReader.getDataValue(TelemetryData::LINK_QUALITY));
+    //dataDrawer.setValue(TelemetryData::LINK_QUALITY, rand() % 100);
 
-    Serial.println(telemetryReader.getDataValue(TelemetryData::LINK_QUALITY));
+    //Serial.println(telemetryReader.getDataValue(TelemetryData::LINK_QUALITY));
 
     //Serial.print("Analog 1 : ");
     //Serial.print(telemetryReader.getDataValue(TelemetryData::ANALOG1));
@@ -57,12 +68,13 @@ void Sketch::main()
     
     frames++;
     
-    drawData();
-    Serial.print("Loop: ");
+    //drawData();
+    //Serial.print("Loop: ");
     Serial.println(frames);
+    delay(10);
 }
 
 void Sketch::drawData()
 {
-    dataDrawer.drawNextValue();
+    //dataDrawer.drawNextValue();
 }

@@ -21,7 +21,7 @@ DataDrawer::~DataDrawer()
 void DataDrawer::init() 
 {
     //Initialising the TFT screen
-    tft.initR(INITR_BLACKTAB);
+    tft.initR();
     tft.fillScreen(BACKGROUND_COLOR);
 }
 
@@ -38,6 +38,7 @@ void DataDrawer::setDataAmount(uint8_t dispDataLen)
 }
 void DataDrawer::setDisplayData(uint8_t index, TelemetryData newData)
 {
+    digitalWrite(0, HIGH);
     displayedData[index] = newData;
 }
 
@@ -45,8 +46,11 @@ void DataDrawer::prepareDisplay()
 {
     currentHeight = 0;
     tft.setTextColor(TEXT_COLOR, BACKGROUND_COLOR);
+    //tft.setBgColor(BACKGROUND_COLOR);
     tft.setTextSize(TEXT_SIZE);
 
+    tft.fillRect(0,0,100,100, ST7735_RED);
+    //drawTextLine("Hello world");
     //Draw the description text for all the data
     for(int i = 0; i < dispDataLen; ++i)
     {

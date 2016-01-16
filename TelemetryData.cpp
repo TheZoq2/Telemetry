@@ -1,5 +1,6 @@
 #include "TelemetryData.h"
 
+#include <Arduino.h>
 #include <string.h>
 
 TelemetryData::TelemetryData()

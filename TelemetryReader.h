@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 #include <SoftwareSerial.h>
-#include <AltSoftSerial.h>
+//#include <AltSoftSerial.h>
 
 #include <stdint.h>
 
