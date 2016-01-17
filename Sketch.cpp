@@ -13,9 +13,7 @@ Sketch::Sketch()
 
 void Sketch::setup()
 {
-    //Set up pins for serial
-    pinMode(Globals::RX_PIN, INPUT);
-    pinMode(Globals::TX_PIN, OUTPUT);
+    pinMode(10, OUTPUT);
     pinMode(0, OUTPUT);
     //Initialise serial communication
     //xSerial.begin(Globals::RX_BAUD_RATE);
@@ -24,12 +22,11 @@ void Sketch::setup()
     //Start the hardware serial aswell
     Serial.begin(115200);
 
-    Serial.println("Initialising monitor");
-
     dataDrawer.init();
 
 
     dataDrawer.setDataAmount(2);
+    delay(20);
     dataDrawer.setDisplayData(0, TelemetryData("Battery", TelemetryData::ANALOG1));
     dataDrawer.setDisplayData(1, TelemetryData("Signal", TelemetryData::LINK_QUALITY));
     //dataDrawer.addDisplayData(TelemetryData("Battery", TelemetryData::ANALOG1));
@@ -37,15 +34,7 @@ void Sketch::setup()
 
     delay(200);
     dataDrawer.prepareDisplay();
-    Serial.println("Setup complete");
 
-    //xSerial.available();
-    Serial.println("Starting main");
-
-    //xSerial.available();
-    
-    Serial.send_now();
-    
     digitalWrite(0, HIGH);
 }
 
@@ -55,7 +44,7 @@ void Sketch::main()
 
     //dataDrawer.setValue(TelemetryData::ANALOG1, telemetryReader.getDataValue(TelemetryData::ANALOG1));
     //dataDrawer.setValue(TelemetryData::LINK_QUALITY, telemetryReader.getDataValue(TelemetryData::LINK_QUALITY));
-    //dataDrawer.setValue(TelemetryData::LINK_QUALITY, rand() % 100);
+    dataDrawer.setValue(TelemetryData::LINK_QUALITY, rand() % 100);
 
     //Serial.println(telemetryReader.getDataValue(TelemetryData::LINK_QUALITY));
 
@@ -68,7 +57,7 @@ void Sketch::main()
     
     frames++;
     
-    //drawData();
+    drawData();
     //Serial.print("Loop: ");
     Serial.println(frames);
     delay(10);
@@ -76,5 +65,5 @@ void Sketch::main()
 
 void Sketch::drawData()
 {
-    //dataDrawer.drawNextValue();
+    dataDrawer.drawNextValue();
 }

@@ -13,6 +13,7 @@ TelemetryData::TelemetryData()
 TelemetryData::TelemetryData(const char* name, DataIndex dataIndex)
 {
     //this->name = name;
+    this->name = new char[MAX_NAME_LEN];
     this->name = strcpy(this->name, name);
     this->dataIndex = dataIndex;
     this->value = 0;

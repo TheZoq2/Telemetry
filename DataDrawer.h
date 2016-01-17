@@ -36,7 +36,7 @@ private:
     static const uint16_t BACKGROUND_COLOR = ST7735_BLACK;
     static const uint16_t TEXT_COLOR = ST7735_WHITE;
 
-    static const uint8_t TEXT_SIZE = 2;
+    static const uint8_t TEXT_SIZE = 1;
     static const uint8_t DATA_SIZE = 2;
     static const uint8_t TEXT_HEIGHT = 30;
     static const uint8_t DATA_TEXT_Y_OFFSET = 10;

@@ -7,6 +7,7 @@ DataDrawer::DataDrawer() :
 
     displayedData = NULL;
     dispDataLen = 0;
+    currentDrawnIndex = 0;
 }
 DataDrawer::~DataDrawer()
 {
@@ -38,7 +39,6 @@ void DataDrawer::setDataAmount(uint8_t dispDataLen)
 }
 void DataDrawer::setDisplayData(uint8_t index, TelemetryData newData)
 {
-    digitalWrite(0, HIGH);
     displayedData[index] = newData;
 }
 
@@ -49,7 +49,7 @@ void DataDrawer::prepareDisplay()
     //tft.setBgColor(BACKGROUND_COLOR);
     tft.setTextSize(TEXT_SIZE);
 
-    tft.fillRect(0,0,100,100, ST7735_RED);
+    //tft.fillRect(0,0,100,100, ST7735_RED);
     //drawTextLine("Hello world");
     //Draw the description text for all the data
     for(int i = 0; i < dispDataLen; ++i)
@@ -58,6 +58,8 @@ void DataDrawer::prepareDisplay()
         drawTextLine(displayedData[i].getName());
         //drawTextLine("Hello world");
     }
+
+    tft.setTextSize(DATA_SIZE);
 }
 
 void DataDrawer::drawTextLine(const char* line)
