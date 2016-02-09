@@ -10,6 +10,8 @@
 #include <BoundedQueue.h>
 #include "TelemetryData.h"
 
+#define TELEM_SERIAL Serial1
+
 /*
  *  Note that the documentation might be wrong. It appears like the bytes sent from my
  *  updated d8r-II plus are only 10 bytes long as opposed to the 11 bytes in the documentation.
@@ -20,7 +22,7 @@
 class TelemetryReader
 {
 public:
-    TelemetryReader(SoftwareSerial& xSerial);
+    TelemetryReader();
 
     void update();
 
@@ -45,7 +47,6 @@ private:
     static const uint8_t RC_STATUS_HEADER = 0xFE;
 
     //Private members
-    SoftwareSerial& xSerial;
 
     //The current frame needs to be stored because the tx/rx seem to spit out data as it arrives.
     BoundedQueue<uint8_t> currentFrame;

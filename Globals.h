@@ -15,6 +15,8 @@ struct Globals
     static const uint8_t TFT_CS = 10;
     static const uint8_t TFT_RST = 9;
     static const uint8_t TFT_DC = 8;
+
+    static const uint8_t DEBUG_PIN = 23;
 };
 
 #endif

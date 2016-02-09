@@ -1,29 +1,29 @@
 #include "TelemetryReader.h"
 
-TelemetryReader::TelemetryReader(SoftwareSerial& xSerial):
-    xSerial(xSerial),
+TelemetryReader::TelemetryReader():
     currentFrame(FRAME_LENGTH)
 {
+    TELEM_SERIAL.begin(9600, SERIAL_8N2_RXINV_TXINV);
 }
 
 void TelemetryReader::update() 
 {
-    //xSerial.available();
-    //if(xSerial.available())
-    //{
-    //    readByte();
+    if(TELEM_SERIAL.available())
+    {
+        Serial.println("Got serial");
+        readByte();
 
-    //    if(currentFrame.getSize() == FRAME_LENGTH)
-    //    {
-    //        uint8_t firstByte = currentFrame.dequeue();
+        if(currentFrame.getSize() == FRAME_LENGTH)
+        {
+            uint8_t firstByte = currentFrame.dequeue();
 
-    //        //The following bytes are a valid frame
-    //        if(firstByte == FRAME_EDGE_BYTE && isValidFrame())
-    //        {
-    //            decodeFrame();
-    //        }
-    //    }
-    //}
+            //The following bytes are a valid frame
+            if(firstByte == FRAME_EDGE_BYTE && isValidFrame())
+            {
+                decodeFrame();
+            }
+        }
+    }
 }
 
 uint8_t TelemetryReader::getDataValue(TelemetryData::DataIndex dataType) 
@@ -35,7 +35,7 @@ uint8_t TelemetryReader::getDataValue(TelemetryData::DataIndex dataType)
 //////////////////////////////////////////////////////////////////////////////////////////
 void TelemetryReader::readByte() 
 {
-    uint8_t newByte = xSerial.read();
+    uint8_t newByte = TELEM_SERIAL.read();
 
     currentFrame.enqueue(newByte);
 }

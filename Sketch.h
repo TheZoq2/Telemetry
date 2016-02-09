@@ -15,6 +15,7 @@
 #include "Globals.h"
 #include "TelemetryData.h"
 #include "DataDrawer.h"
+#include "TelemetryReader.h"
 
 class Sketch
 {
@@ -28,7 +29,7 @@ public:
 private:
     //SoftwareSerial xSerial;
 
-    //TelemetryReader telemetryReader;
+    TelemetryReader telemetryReader;
 
     DataDrawer dataDrawer;
     int frames = 0;

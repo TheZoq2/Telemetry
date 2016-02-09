@@ -35,14 +35,14 @@ void Sketch::setup()
     delay(200);
     dataDrawer.prepareDisplay();
 
-    digitalWrite(0, HIGH);
+    digitalWrite(Globals::DEBUG_PIN, HIGH);
 }
 
 void Sketch::main()
 {
-    //telemetryReader.update();
+    telemetryReader.update();
 
-    //dataDrawer.setValue(TelemetryData::ANALOG1, telemetryReader.getDataValue(TelemetryData::ANALOG1));
+    dataDrawer.setValue(TelemetryData::ANALOG1, telemetryReader.getDataValue(TelemetryData::ANALOG1));
     //dataDrawer.setValue(TelemetryData::LINK_QUALITY, telemetryReader.getDataValue(TelemetryData::LINK_QUALITY));
     dataDrawer.setValue(TelemetryData::LINK_QUALITY, rand() % 100);
 
@@ -59,8 +59,8 @@ void Sketch::main()
     
     drawData();
     //Serial.print("Loop: ");
-    Serial.println(frames);
-    delay(10);
+    //Serial.println(frames);
+    //delay(10);
 }
 
 void Sketch::drawData()
